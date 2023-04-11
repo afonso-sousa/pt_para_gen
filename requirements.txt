@@ -1,0 +1,8 @@
+transformers
+torch
+sentence-transformers
+pyspellchecker
+levenshtein
+protobuf==3.20.0
+datasets
+evaluate
