@@ -61,7 +61,7 @@ python ./sts/test.py
 We train two models (M2M100 and mBart). Run the respective scripts. For example, to train and evaluate a mBart model, run the following scripts:
 
 ### Train
-Run [scripts/train_mbart.sh](https://github.com/afonso-sousa/pt_para_gen/blob/main/script/train_mbart.py):
+Run [scripts/train_mbart.sh](https://github.com/afonso-sousa/pt_para_gen/blob/main/scripts/train_mbart.py):
 ```shell
 sh ./scripts/train_mbart.sh
 ```
