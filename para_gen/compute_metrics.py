@@ -3,11 +3,10 @@ import os
 
 from dataclasses import dataclass, field
 from typing import Optional
-from data import DatasetArguments, prepare_dataset
+from data import DatasetArguments
 from transformers import HfArgumentParser
 import evaluate
-import pandas as pd
-import numpy as np
+from datasets import load_dataset
 
 
 @dataclass
@@ -48,9 +47,13 @@ def main():
 
     os.makedirs(os.path.abspath(os.path.dirname(eval_args.output_path)), exist_ok=True)
 
-    dataset_args.csv_delimiter = "\t"
-    dataset = prepare_dataset(dataset_args)
-    # breakpoint()
+    dataset = load_dataset(
+        "csv",
+        data_files=dataset_args.train_file,
+        keep_in_memory=dataset_args.dataset_keep_in_memory,
+        cache_dir=dataset_args.dataset_cache_dir,
+        sep="\t",
+    )["train"]
     column_names = dataset.column_names
 
     sources = (

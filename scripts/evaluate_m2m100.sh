@@ -11,7 +11,7 @@ metrics="my_metric"
 output_file="$output_dir/$name/$metrics.csv"
 
 if [ ! -f "$output_file" ]; then
-    job="python compute_metrics.py \
+    job="python para_gen/compute_metrics.py \
             --source_column source \
             --target_column target \
             --predictions_column prediction \

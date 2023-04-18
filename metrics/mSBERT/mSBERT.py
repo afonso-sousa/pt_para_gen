@@ -77,7 +77,8 @@ class CrossMetric(evaluate.Metric):
     def _download_and_prepare(self, dl_manager):
         """Optional: download external resources useful to compute the scores"""
         if self.config_name == "default":
-            model_name = "sentence-transformers/paraphrase-mpnet-base-v2"
+            model_name = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+            # model_name = "ricardo-filho/bert-base-portuguese-cased-nli-assin-2"
         else:
             model_name = self.config_name
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -101,7 +102,6 @@ class CrossMetric(evaluate.Metric):
         )
 
     def embed(self, sentences):
-
         inputs = self.tokenizer(
             list(sentences), padding=True, truncation=True, return_tensors="pt"
         )
@@ -128,9 +128,8 @@ class CrossMetric(evaluate.Metric):
                 to_batches(predictions, batch_size), to_batches(references, batch_size)
             ),
             total=int(ceil(min(len(predictions), len(references)) / batch_size)),
-            desc="cross_metric",
+            desc="mSBERT",
         ):
-
             preds_embeds.append(self.embed(preds))
             refs_embeds.append(self.embed(refs))
 

@@ -68,7 +68,7 @@ class MyMetric(evaluate.Metric):
         device = "cuda" if torch.cuda.is_available() else "cpu"
         self.bleu = evaluate.load("bleu", experiment_id=self.experiment_id)
         self.sbert = SentenceTransformer(
-            "ricardo-filho/bert-base-portuguese-cased-nli-assin-2"
+            "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
         ).to(device)
 
     def _compute(self, sources, predictions, references):

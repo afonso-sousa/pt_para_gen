@@ -8,12 +8,13 @@ dataset="opensubtitles"
 output_file=$model_name-$dataset-lr$lr-standard
 
 
-python train.py \
+python para_gen/train.py \
     --model_name_or_path $model_name \
     --do_train \
     --do_eval \
     --source_lang pt_XX \
     --target_lang pt_XX \
+    --forced_bos_token pt_XX \
     --source_column source \
     --target_column target \
     --output_dir $output_dir/$output_file \

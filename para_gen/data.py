@@ -4,7 +4,6 @@ from typing import Optional
 import sys
 import unicodedata
 import re
-from functools import partial
 
 
 def extract_suffix(file_name):
@@ -228,20 +227,13 @@ def prepare_dataset(dataset_args, logger=None):
             data_files["test"] = dataset_args.test_file
             extension = extract_suffix(dataset_args.test_file)
 
-    load_dataset_partial = partial(
-        load_dataset,
+    datasets = load_dataset(
         extension,
         data_files=data_files,
         split=dataset_split,
         keep_in_memory=dataset_args.dataset_keep_in_memory,
         cache_dir=dataset_args.dataset_cache_dir,
     )
-    if extension == "csv":
-        datasets = load_dataset_partial(
-            sep=dataset_args.delimiter,
-        )
-    else:
-        datasets = load_dataset_partial()
 
     datasets = datasets.map(
         clean_data,

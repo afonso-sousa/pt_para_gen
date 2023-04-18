@@ -7,13 +7,13 @@ lr="1e-4"
 dataset="opensubtitles"
 output_file=$model_name-$dataset-lr$lr-standard
 
-
-python train.py \
+python para_gen/train.py \
     --model_name_or_path $model_name \
     --do_train \
     --do_eval \
     --source_lang pt \
     --target_lang pt \
+    --forced_bos_token pt \
     --source_column source \
     --target_column target \
     --output_dir $output_dir/$output_file \
@@ -33,4 +33,4 @@ python train.py \
     --logging_strategy steps \
     --evaluation_strategy epoch \
     --save_strategy epoch \
-    --save_total_limit 2 
+    --save_total_limit 2

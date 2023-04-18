@@ -3,14 +3,14 @@
 datasets_dir="processed-data"
 model_dir="output"
 output_dir=$model_dir
-model_name="facebook/m2m100_418M"
+model_name="facebook/mbart-large-50"
 lr="1e-4"
 dataset="opensubtitles"
 name=$model_name-$dataset-lr$lr-standard
 checkpoint="checkpoint-7264"
 
 
-python generate_predictions.py \
+python para_gen/generate_predictions.py \
     --validation_file $datasets_dir/$dataset/test.jsonl \
     --model_name_or_path $model_dir/${name}/${checkpoint} \
     --output_dir $output_dir/$name \
