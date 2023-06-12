@@ -9,7 +9,7 @@ df = pd.read_json(codecs.open(data_file, "r", "utf-8"), lines=True, orient="reco
 
 # %%
 # it is better to sample as the dataset is big
-df = df.sample(n=100_000)
+df = df.sample(n=800_000)
 
 # %%
 from matplotlib import pyplot as plt
@@ -87,4 +87,63 @@ plt.plot(bin_centers, hist / len(df["sem_sim"]))
 norm_data = (df["sem_sim"] - np.min(df["sem_sim"])) / (
     np.max(df["sem_sim"]) - np.min(df["sem_sim"])
 )
+
+# %%
+# General statistics from other datasets
+from datasets import load_dataset
+
+paws = load_dataset("paws", "labeled_final")
+qqp = load_dataset("SetFit/qqp")
+tapaco = load_dataset("processed-data/tapaco")
+
+# %%
+paws_pos = paws.filter(lambda example: example["label"] == 1)
+qqp_pos = qqp.filter(lambda example: example["label"] == 1)
+
+# %%
+from tqdm import tqdm
+from nltk.tokenize import word_tokenize
+
+tqdm.pandas()
+
+
+def get_num_words(sample, language):
+    return len(word_tokenize(sample, language=language))
+
+
+paws_df = pd.DataFrame(
+    {
+        "source": paws_pos["validation"]["sentence1"],
+        "target": paws_pos["validation"]["sentence2"],
+    }
+)
+paws_df["src_len"] = paws_df["source"].progress_apply(get_num_words, language="english")
+paws_df["tgt_len"] = paws_df["target"].progress_apply(get_num_words, language="english")
+paws_df.mean(numeric_only=True).round(3)
+
+# %%
+qqp_df = pd.DataFrame(
+    {"source": qqp_pos["validation"]["text1"], "target": qqp_pos["validation"]["text2"]}
+)
+qqp_df["src_len"] = qqp_df["source"].progress_apply(get_num_words, language="english")
+qqp_df["tgt_len"] = qqp_df["target"].progress_apply(get_num_words, language="english")
+qqp_df.mean(numeric_only=True).round(3)
+
+# %%
+tapaco_df = pd.DataFrame(
+    {"source": tapaco["train"]["source"], "target": tapaco["train"]["target"]}
+)
+tapaco_df["src_len"] = tapaco_df["source"].progress_apply(
+    get_num_words, language="portuguese"
+)
+tapaco_df["tgt_len"] = tapaco_df["target"].progress_apply(
+    get_num_words, language="portuguese"
+)
+tapaco_df.mean(numeric_only=True).round(3)
+
+# %%
+df["src_len"] = df["source"].progress_apply(get_num_words, language="portuguese")
+df["tgt_len"] = df["target"].progress_apply(get_num_words, language="portuguese")
+df.mean(numeric_only=True).round(3)
+
 # %%

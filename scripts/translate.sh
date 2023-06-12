@@ -1,5 +1,5 @@
 datasets_dir="raw-data"
-dataset="opensubtitles"
+dataset="ospt"
 input_dir="raw-data"
 output_file=$datasets_dir/$dataset/full.jsonl
 

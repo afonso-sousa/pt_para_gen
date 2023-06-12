@@ -5,9 +5,9 @@ model_dir="output"
 output_dir=$model_dir
 model_name="facebook/mbart-large-50"
 lr="1e-4"
-dataset="ospt"
-name=$model_name-$dataset-lr$lr-standard
-checkpoint="checkpoint-7500"
+dataset="assin2"
+name=$model_name-ospt-lr$lr-standard
+checkpoint="checkpoint-15000"
 
 
 python para_gen/generate_predictions.py \

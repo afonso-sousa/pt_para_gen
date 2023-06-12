@@ -2,18 +2,19 @@
 
 datasets_dir="processed-data"
 output_dir="output"
-model_name="facebook/m2m100_418M"
+model_name="facebook/mbart-large-50"
 lr="1e-4"
-dataset="opensubtitles"
+dataset="tapaco"
 output_file=$model_name-$dataset-lr$lr-standard
+
 
 python para_gen/train.py \
     --model_name_or_path $model_name \
     --do_train \
     --do_eval \
-    --source_lang pt \
-    --target_lang pt \
-    --forced_bos_token pt \
+    --source_lang pt_XX \
+    --target_lang pt_XX \
+    --forced_bos_token pt_XX \
     --source_column source \
     --target_column target \
     --output_dir $output_dir/$output_file \
@@ -33,4 +34,4 @@ python para_gen/train.py \
     --logging_strategy steps \
     --evaluation_strategy epoch \
     --save_strategy epoch \
-    --save_total_limit 2
+    --save_total_limit 2 
