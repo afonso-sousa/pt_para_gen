@@ -62,9 +62,9 @@ sh ./scripts/test_sts_mbert_assin2.sh
 We train mBart models on ASSIN2 and TaPaCo. Run the respective scripts. For example, to train and evaluate a mBart model, run the following scripts:
 
 ### Train
-Run [scripts/train_mbart_ospt_assin2.sh](https://github.com/afonso-sousa/pt_para_gen/blob/main/scripts/train_mbart_ospt_assin2.sh):
+Run [scripts/train_mbart_ospt.sh](https://github.com/afonso-sousa/pt_para_gen/blob/main/scripts/train_mbart_ospt.sh):
 ```shell
-sh ./scripts/train_mbart_ospt_assin2.sh
+sh ./scripts/train_mbart_ospt.sh
 ```
 
 ### Test
