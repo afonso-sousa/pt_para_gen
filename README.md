@@ -1,8 +1,11 @@
-# European Portuguese Paraphrastic Dataset with Machine Translation
+# OSPT: European Portuguese Paraphrastic Dataset with Machine Translation
 
-This repo contains the code for the paper European Portuguese Paraphrastic Dataset with Machine Translation, by Afonso Sousa & Henrique Lopes Cardoso, accepted at [EPIA'23](https://epia2023.inesctec.pt/).
+This repo contains the code for the paper [European Portuguese Paraphrastic Dataset with Machine Translation](https://link.springer.com/chapter/10.1007/978-3-031-49008-8_36), by Afonso Sousa & Henrique Lopes Cardoso, accepted at [EPIA'23](https://epia2023.inesctec.pt/).
 
 We describe a new linguistic resource for the generation of paraphrases in Portuguese. This dataset comprises more than one million Portuguese-Portuguese sentential paraphrase pairs. We generated the pairs automatically by using neural machine translation to translate the non-Portuguese side of a large parallel corpus. We hope this new corpus can be a valuable resource for paraphrase generation and provide a rich semantic knowledge source to improve downstream natural language understanding tasks. To show the quality and utility of such a dataset, we use it to train paraphrastic sentence embeddings that outperform all other systems on ASSIN2 semantic textual similarity competition, in addition to showing how it can be used for paraphrase generation.
+
+## Download Corpus
+You can download the corpus [here](https://uporto-my.sharepoint.com/:f:/g/personal/up201709001_up_pt/Espix4YTMsZFvjQ3lX4pXmwBsV51E7GK0TQZ3XTjWT-mVg?e=YmgavB). You will find a `full.jsonl` file with every paraphrase pair, and three files, train, validation and test, with the split used for the paraphrase generation experiments.
 
 ## Installation
 
@@ -80,4 +83,16 @@ sh ./scripts/gen_mbart_ospt_assin2.sh
 Run script [scripts/evaluate_mbart_ospt_assin2.sh](https://github.com/afonso-sousa/pt_para_gen/blob/main/scripts/evaluate_mbart_ospt_assin2.sh):
 ```shell
 sh ./scripts/evaluate_mbart_ospt_assin2.sh
+```
+
+## Cite
+```
+@inproceedings{sousa2023ospt,
+  title={OSPT: European Portuguese Paraphrastic Dataset with Machine Translation},
+  author={Sousa, Afonso and Cardoso, Henrique Lopes},
+  booktitle={EPIA Conference on Artificial Intelligence},
+  pages={454--466},
+  year={2023},
+  organization={Springer}
+}
 ```
